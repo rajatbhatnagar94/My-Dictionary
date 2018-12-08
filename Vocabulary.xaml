@@ -1,0 +1,125 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Dictionary2.Vocabulary"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit ="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignData Sample Data/SampleData.xaml}"
+    shell:SystemTray.IsVisible="False"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+
+    >
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileFeatherTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileFeatherTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileFeatherTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileFeatherTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="MydataTemplate">
+            
+            <StackPanel x:Name="stack" 
+                        Margin="0,0,36,17" 
+                        toolkit:TurnstileFeatherEffect.FeatheringIndex="1"
+                        >
+                
+                <TextBlock x:Name="word"  
+                           Text="{Binding Word}" 
+                           TextWrapping="Wrap" 
+                           Style="{StaticResource LongListSelectorGroupHeaderLetterTileStyle}"
+                           
+                           />
+               
+                <TextBlock x:Name="definition" 
+                           Text="{Binding Definition}" 
+                           Style="{StaticResource PhoneTextSmallStyle}"
+                           TextWrapping="Wrap"
+                           
+                           /> 
+
+            </StackPanel>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneAccentBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+
+            <TextBlock Text="Saved Words"
+                       x:Name="tb"
+                       Margin="20,-7,0,0" 
+                       Style="{StaticResource PhoneTextGroupHeaderStyle }" 
+                       Foreground="{StaticResource PhoneForegroundBrush}"
+                       toolkit:TurnstileFeatherEffect.FeatheringIndex="0"
+                       />
+
+
+        </StackPanel>
+
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" 
+              Margin="12,0,12,0">
+
+            <!--<phone:LongListSelector
+                    ItemsSource="{Binding Items}"
+                    ItemTemplate="{StaticResource MydataTemplate}" Hold="onHoldDeleteText" RenderTransformOrigin="0.5,0.5" Tap="LongListSelector_Tap"
+                    
+                />-->
+            <toolkit:LongListMultiSelector
+                x:Name="LongList"
+                ItemsSource="{Binding Items}"
+                SelectionChanged="LongList_SelectionChanged" 
+                Hold="LongList_Hold"
+                ItemTemplate="{StaticResource MydataTemplate}"
+                Visibility="Collapsed"
+                >
+            
+            </toolkit:LongListMultiSelector>
+            <!--Tap="LongList_Tap"-->
+            
+            <phone:LongListSelector
+                x:Name="SmallList"
+                ItemsSource="{Binding Items}"
+                ItemTemplate="{StaticResource MydataTemplate}" 
+                Tap="SmallList_Tap"
+                Hold="SmallList_Hold"
+                >
+            </phone:LongListSelector>
+
+
+        </Grid>
+        
+    </Grid>
+
+</phone:PhoneApplicationPage>

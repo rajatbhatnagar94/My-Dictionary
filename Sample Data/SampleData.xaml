@@ -1,0 +1,14 @@
+﻿<vm:SavedData
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:Dictionary2">
+    <vm:SavedData.Items>
+        <vm:DictionaryContents Word="Hello" Definition="Greeting from rajat"/>
+        <vm:DictionaryContents Word="Hello" Definition="Greeting from rajat"/>
+        <vm:DictionaryContents Word="Hello" Definition="Greeting from rajat"/>
+        <vm:DictionaryContents Word="Hello" Definition="Greeting from rajat"/>
+        <vm:DictionaryContents Word="Hello" Definition="Greeting from rajat"/>
+    </vm:SavedData.Items>
+    
+
+</vm:SavedData>
